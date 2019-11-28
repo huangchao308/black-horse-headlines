@@ -1,0 +1,14 @@
+{
+  "defaultSeverity": "warning",
+  "extends": "tslint:recommended",
+  "jsRules": {},
+  "rules": {
+    "radix": false
+  },
+  "linterOptions": {
+    "exclude": [
+      "./__tests__/*.ts",
+      "*.json"
+    ]
+  }
+}
