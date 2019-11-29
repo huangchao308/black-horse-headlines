@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest --coverage",
     "build": "tsc",
-    "fix": "tslint --project . --fix"
+    "fix": "tslint --project . --fix",
+    "server:start": "jwtSecret=f214cd68-98f4-4736-9708-5eefe9260829 node ./build/server/index.js"
   },
   "repository": {
     "type": "git",
