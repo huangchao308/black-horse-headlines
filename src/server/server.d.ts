@@ -4,3 +4,8 @@ type LoginUser = {
   name: string
   photo: string
 }
+
+declare enum TokenType {
+  REFRESH = 'refresh',
+  TOKEN = 'token'
+}

@@ -39,7 +39,7 @@ export default class UserController {
 
   public async refreshToken (refreshToken: string) {
     try {
-      const payload: any = jwt.verify(refreshToken, this.secret, { subject: 'refresh' })
+      const payload: any = jwt.verify(refreshToken, this.secret, { subject: TokenType.REFRESH })
       return {
         code: 201,
         message: 'success',
@@ -54,7 +54,7 @@ export default class UserController {
     }
   }
 
-  public verifyToken (token: string, options?: any): boolean {
+  public verifyToken (token: string, options?): boolean {
     try {
       jwt.verify(token, this.secret, options)
       return true
@@ -73,17 +73,16 @@ export default class UserController {
     return user as any
   }
 
-  private async getSecret (id: string) {
-    const user: any = await UserModel.findById(id)
-    return user.pass
-  }
-
-  private getToken (id: string, subject: string = 'token') {
+  private getToken (id: string, subject: string = TokenType.TOKEN) {
+    let exp = moment().add(10, 'minute').unix()
+    if (subject === TokenType.REFRESH) {
+      exp =  moment().add(30, 'minute').unix()
+    }
     const payload = {
       iss: 'black-horse-headlines',
       sub: subject,
       aud: id,
-      exp: moment().add(10, 'minute').unix(),
+      exp,
       iat: moment().unix()
     }
 
