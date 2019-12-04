@@ -5,7 +5,7 @@ type LoginUser = {
   photo: string
 }
 
-declare enum TokenType {
+declare const enum TokenType {
   REFRESH = 'refresh',
   TOKEN = 'token'
 }
